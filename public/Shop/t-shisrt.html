@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Áo Sơ Mi Nam - THE OFFICELOOK</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Banner Section */
+        .banner-section {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto 40px;
+            padding-top: 10px;
+            overflow: hidden;
+        }
+
+        .banner-strip {
+            background: #3a3a3a;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        .banner-strip .tick {
+            display: inline-block;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        .banner-content {
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f7f7f7;
+            overflow: hidden;
+        }
+
+        .banner-content img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        header {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            gap: 20px;
+        }
+
+        .logo {
+            flex-shrink: 0;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex: 1;
+            justify-content: center;
+            margin: 0 12px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #111;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+            margin-left: auto;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            border-radius: 20px;
+            min-width: 230px;
+            height: 40px;
+        }
+
+        .search-box svg {
+            width: 18px;
+            height: 18px;
+            color: #666;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            background: transparent;
+        }
+
+        .icon-buttons {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .icon-buttons button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .icon-buttons svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #333;
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
+
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-list {
+            list-style: none;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 10px;
+        }
+
+        .sidebar-list a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            display: block;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+
+        .sidebar-list a:hover,
+        .sidebar-list a.active {
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* Products Section */
+        .products-section {
+            flex: 1;
+        }
+
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .products-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .products-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+        }
+
+        .view-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .view-btn:hover,
+        .view-btn.active {
+            background: #333;
+            border-color: #333;
+            color: white;
+        }
+
+        .filter-select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 450px;
+            background: #f5f5f5;
+            overflow: hidden;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #d32f2f;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+
+        .product-info {
+            text-align: left;
+        }
+
+        .product-name {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .product-price.sale {
+            color: #d32f2f;
+        }
+
+        .product-price-old {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .pagination button {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover {
+            background: #f5f5f5;
+        }
+
+        .pagination button.active {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination .dots {
+            border: none;
+            background: none;
+            cursor: default;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+ <!-- Header -->
+ <header>
+    <div class="header-container">
+        <a href="#" class="logo" style="display: flex; align-items: center; justify-content: center; text-decoration: none; min-width: 150px;">
+            <img src="./img/lo.webp" alt="CANIFA OFICELOOK" style="width: 150px; height: auto; display: block;">
+        </a>
+        
+        <nav>
+            <a href="index.html">TRANG CHỦ</a>
+            <a href="t-shisrt.html">ÁO</a>
+            <a href="trousers.html">QUẦN</a>
+            <a href="blog.html">BÀI VIẾT</a>
+            <a href="about.html">VỀ CHÚNG TÔI</a>
+            <a href="#">LIÊN HỆ</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" placeholder="Bạn đang tìm gì ?">
+            </div>
+            
+            <div class="icon-buttons">
+                    <!-- <button aria-label="Yêu thích">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </button> -->
+                <button aria-label="Tài khoản">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+                    </svg>
+                </button>
+                <button aria-label="Giỏ hàng">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+    <!-- Banner Section -->
+    <div class="banner-section">
+        <div class="banner-strip">
+            <span class="tick">✓</span>CHANGE VIEW POINT - SEE NOW
+        </div>
+        <div class="banner-content">
+            <img src="./img/banner áo sơ mi1.jpg" alt="Banner Áo Sơ Mi Nam">
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="#">Trang chủ</a> | <a href="#">Áo</a> | Áo ngắn tay
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">HÀNG MỚI VỀ BỘ SƯU TẬP</h3>
+                    <ul class="sidebar-list">
+                        <li><a href="#">IKIGAI</a></li>
+                        <li><a href="#">KAIZEN</a></li>
+                        <li><a href="#">BST BẠC HÀ</a></li>
+                        <li><a href="#">RENU</a></li>
+                        <li><a href="#">JOY THE BEST</a></li>
+                        <li><a href="#">CHANGE VIEW POINT</a></li>
+                        <li><a href="#">BST RETRO</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">GIÁ TỐT</h3>
+                    <ul class="sidebar-list">
+                        <li><a href="#">Polo tshirt</a></li>
+                        <li><a href="#">Quần giá tốt</a></li>
+                        <li><a href="#">Quần short</a></li>
+                        <li><a href="#">Quần Tây</a></li>
+                        <li><a href="#">Quần Kaki</a></li>
+                        <li><a href="#">Quần Jean</a></li>
+                        <li><a href="#">Quần Jokker</a></li>
+                        <li><a href="#">Quần Ni</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                 
+                    <ul class="sidebar-list">
+                        <li><a href="#">Đồ Lót</a></li>
+                        <li><a href="#">Tất</a></li>
+                        <li><a href="#">Dây Lưng</a></li>
+                        <li><a href="#">Ví</a></li>
+                        <li><a href="#">Cà Vạt</a></li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">SẢN PHẨM BÁN CHẠY</h3>
+                </div>
+            </aside>
+
+            <!-- Products Section -->
+            <main class="products-section">
+                <div class="products-header">
+                    <h2 class="products-title">HÀNG MỚI VỀ BỘ SƯU TẬP</h2>
+                    <div class="products-controls">
+                        <span>Hiện thị</span>
+                        <div class="view-toggle">
+                            <button class="view-btn active">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <rect width="4" height="4"/>
+                                    <rect x="6" width="4" height="4"/>
+                                    <rect x="12" width="4" height="4"/>
+                                    <rect y="6" width="4" height="4"/>
+                                    <rect x="6" y="6" width="4" height="4"/>
+                                    <rect x="12" y="6" width="4" height="4"/>
+                                    <rect y="12" width="4" height="4"/>
+                                    <rect x="6" y="12" width="4" height="4"/>
+                                    <rect x="12" y="12" width="4" height="4"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <select class="filter-select">
+                            <option>Bộ lọc</option>
+                            <option>Giá tăng dần</option>
+                            <option>Giá giảm dần</option>
+                            <option>Mới nhất</option>
+                            <option>Bán chạy nhất</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-grid" id="productsGrid"></div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination"></div>
+            </main>
+        </div>
+    </div>
+<!-- footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Company Info -->
+        <div class="footer-company">
+            <div class="footer-logo">
+                
+                    <path d="M10 8 C10 6 12 5 14 6 L14 12 C14 14 16 15 18 14 L24 14 C26 14 27 16 26 18 L26 24 C27 26 25 28 23 27 L23 21 C23 19 21 18 19 19 L13 19 C11 19 10 17 11 15 L11 9" stroke="black" fill="none" stroke-width="2"/>
+                </svg>
+                <span>THE<br>OFICELOOK</span>
+            </div>
+            <h3>CÔNG TY CỔ PHẦN THỜI KOWLI VIỆT NAM</h3>
+            <p><strong>Hotline:</strong> 1900 1080</p>
+            <p>8:30 - 19:00 tất cả các ngày trong tuần</p>
+            <p><strong>VP Phía Bắc:</strong> Tầng 17 tòa nhà Viwaseen, 48 Phố Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội.</p>
+            <p><strong>VP Phía Nam:</strong> 186A Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP.HCM</p>
+        </div>
+
+        <!-- About Section -->
+        <div class="footer-column">
+            <h4>Giới Thiệu The Oficelook</h4>
+            <ul>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Hệ thống cửa hàng</a></li>
+                <li><a href="#">Liên hệ với THE OFICELOOK</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+            </ul>
+        </div>
+
+        <!-- Customer Support -->
+        <div class="footer-column">
+            <h4>Hỗ Trợ Khách Hàng</h4>
+            <ul>
+                <li><a href="#">Hỏi đáp</a></li>
+                <li><a href="#">Chính sách vận chuyển</a></li>
+                <li><a href="#">Hướng dẫn chọn kích cỡ</a></li>
+                <li><a href="#">Hướng dẫn thanh toán</a></li>
+                <li><a href="#">Quy định đổi hàng</a></li>
+                <li><a href="#">Hướng dẫn đổi hàng</a></li>
+            </ul>
+        </div>
+
+        <!-- Warranty Policy -->
+        <div class="footer-column">
+            <h4>Chính Sách Bảo Hành</h4>
+            <ul>
+                <li><a href="#">Chính sách bảo hành online</a></li>
+                <li><a href="#">Chính sách bảo hành tại shop</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Chính sách đổi trả</a></li>
+            </ul>
+        </div>
+
+        <!-- Connect & Payment -->
+        <div class="footer-column">
+            <h4>Kết Nối</h4>
+            <div class="social-icons">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">📷</a>
+                <a href="#" class="social-icon">▶</a>
+            </div>
+            
+            <div class="payment-methods">
+                <h5>Phương Thức Thanh Toán</h5>
+                <div class="payment-icons">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="payment-icon">
+                </div>
+            </div>
+
+            <div class="certification">
+                <!-- <img src="https://via.placeholder.com/120x50/0066CC/FFFFFF?text=BỘ+CÔNG+THƯƠNG" alt="Certification"> -->
+            </div>
+        </div>
+    </div>
+</footer>
+    <script>
+        // View toggle
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const products = Array.from({ length: 38 }, (_, index) => ({
+            id: index + 1,
+            name: `Áo sơ mi ${index + 1}`,
+            price: 180000 + (index % 8) * 30000,
+            image: `./img/ao_so_mi(${index + 1}).webp`
+        }));
+
+        const productsPerPage = 9;
+        const totalPages = Math.ceil(products.length / productsPerPage);
+        let currentPage = 1;
+
+        function formatPrice(value) {
+            return value.toLocaleString('vi-VN') + ' vnd';
+        }
+
+        function renderProducts(page) {
+            const grid = document.getElementById('productsGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+            const start = (page - 1) * productsPerPage;
+            const end = start + productsPerPage;
+            const pageProducts = products.slice(start, end);
+
+            pageProducts.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">
+                        ${page === 1 && index === 0 ? '<div class="product-badge">-20%</div>' : ''}
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-price ${page === 1 && index === 0 ? 'sale' : ''}">
+                            ${formatPrice(product.price)}
+                            ${page === 1 && index === 0 ? '<span class="product-price-old">300.000 vnd</span>' : ''}
+                        </div>
+                    </div>
+                `;
+
+                card.addEventListener('click', function() {
+                    window.location.href = '#product-detail';
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        function renderPagination(page) {
+            const container = document.getElementById('pagination');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            const addButton = (label, targetPage, isActive = false, disabled = false, isDots = false) => {
+                const button = document.createElement('button');
+                button.textContent = label;
+                if (isActive) button.classList.add('active');
+                if (isDots) button.classList.add('dots');
+                if (disabled) button.disabled = true;
+                button.addEventListener('click', function() {
+                    if (!disabled && !isDots) {
+                        goToPage(targetPage);
+                    }
+                });
+                container.appendChild(button);
+            };
+
+            addButton('←', page - 1, false, page === 1);
+
+            for (let i = 1; i <= totalPages; i++) {
+                addButton(i, i, i === page);
+            }
+
+            addButton('→', page + 1, false, page === totalPages);
+        }
+
+        function goToPage(page) {
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderProducts(currentPage);
+            renderPagination(currentPage);
+        }
+
+        // Filter select
+        const filterSelect = document.querySelector('.filter-select');
+        if (filterSelect) {
+            filterSelect.addEventListener('change', function() {
+                console.log('Filter by:', this.value);
+            });
+        }
+
+        goToPage(1);
+    </script>
+
+</body>
+</html>

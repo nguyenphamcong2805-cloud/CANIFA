@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử đơn hàng</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background: #f9f9f9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #333;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-group label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .filter-group input,
+        .filter-group select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-search {
+            background: #333;
+            color: white;
+        }
+
+        .btn-search:hover {
+            background: #555;
+        }
+
+        .btn-reset {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn-reset:hover {
+            background: #ccc;
+        }
+
+        /* Orders List */
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s;
+        }
+
+        .order-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .order-header {
+            background: #f5f5f5;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .order-info {
+            display: flex;
+            gap: 30px;
+            font-size: 14px;
+        }
+
+        .order-info span {
+            font-weight: 500;
+        }
+
+        .order-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-processing {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .status-shipping {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .status-completed {
+            background: #d1e7dd;
+            color: #0a3622;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+        .order-body {
+            padding: 20px;
+        }
+
+        .order-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 100px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .item-specs {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .item-quantity {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .item-price {
+            text-align: right;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .order-total {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .order-total span {
+            color: #d32f2f;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-detail {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #333;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-detail:hover {
+            background: #333;
+            color: white;
+        }
+
+        .btn-reorder {
+            padding: 8px 20px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-reorder:hover {
+            background: #555;
+        }
+
+        .btn-cancel {
+            padding: 8px 20px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background: #b71c1c;
+        }
+
+        /* Empty State */
+        .empty-state {
+            background: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .empty-state h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn-shop {
+            padding: 12px 30px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .btn-shop:hover {
+            background: #555;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .pagination button {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .pagination button:hover {
+            background: #f5f5f5;
+        }
+
+        .pagination button.active {
+            background: #333;
+            color: white;
+            border-color: #333;
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .order-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .order-item {
+                flex-direction: column;
+            }
+
+            .item-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .item-price {
+                text-align: left;
+            }
+
+            .order-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .order-actions {
+                width: 100%;
+            }
+
+            .order-actions button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+<header>
+    <div class="header-container">
+        <a href="#" class="logo">
+           <img src="" alt="">
+            </svg>
+            
+        </a>
+        
+        <nav>
+            <a href="#">HÀNG MỚI</a>
+            <a href="#">ÁO</a>
+            <a href="#">QUẦN</a>
+            <a href="#">PHỤ KIỆN</a>
+            <a href="#">VỀ CHÚNG TÔI</a>
+            <a href="#">GIÁ TỐT</a>
+            <a href="#">CỬA HÀNG</a>
+        </nav>
+
+        <div class="header-right">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" placeholder="Bạn đang tìm gì ?">
+            </div>
+            
+            <div class="icon-buttons">
+                <button aria-label="Yêu thích">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                    </svg>
+                </button>
+                <button aria-label="Tài khoản">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+                    </svg>
+                </button>
+                <button aria-label="Giỏ hàng">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="9" cy="21" r="1"/>
+                        <circle cx="20" cy="21" r="1"/>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+<body>
+    <div class="container">
+        <h1 class="page-title">LỊCH SỬ ĐỢN HÀNG</h1>
+
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>Mã đơn hàng</label>
+                    <input type="text" placeholder="Nhập mã đơn hàng">
+                </div>
+                <div class="filter-group">
+                    <label>Trạng thái</label>
+                    <select>
+                        <option value="">Tất cả</option>
+                        <option value="pending">Chờ xác nhận</option>
+                        <option value="processing">Đang xử lý</option>
+                        <option value="shipping">Đang giao</option>
+                        <option value="completed">Hoàn thành</option>
+                        <option value="cancelled">Đã hủy</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Từ ngày</label>
+                    <input type="date">
+                </div>
+                <div class="filter-group">
+                    <label>Đến ngày</label>
+                    <input type="date">
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button class="btn btn-reset">Đặt lại</button>
+                <button class="btn btn-search">Tìm kiếm</button>
+            </div>
+        </div>
+
+        <!-- Orders List -->
+        <div class="orders-list">
+            <!-- Order 1 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-info">
+                        <div>Mã đơn: <span>#DH001234</span></div>
+                        <div>Ngày đặt: <span>12/11/2025</span></div>
+                    </div>
+                    <div class="order-status status-shipping">Đang giao hàng</div>
+                </div>
+                <div class="order-body">
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">
+                                <img src="https://via.placeholder.com/80x100/d4b5a0/ffffff?text=Áo" alt="Áo sơ mi">
+                            </div>
+                            <div class="item-details">
+                                <div>
+                                    <div class="item-name">Áo sơ mi - A26082005N</div>
+                                    <div class="item-specs">Màu: Be | Size: M</div>
+                                </div>
+                                <div class="item-quantity">Số lượng: 1</div>
+                            </div>
+                            <div class="item-price">534.000 đ</div>
+                        </div>
+                        <div class="order-item">
+                            <div class="item-image">
+                                <img src="https://via.placeholder.com/80x100/c8b4d4/ffffff?text=Áo" alt="Áo sơ mi">
+                            </div>
+                            <div class="item-details">
+                                <div>
+                                    <div class="item-name">Áo sơ mi slim fit - A284205Q</div>
+                                    <div class="item-specs">Màu: Tím | Size: L</div>
+                                </div>
+                                <div class="item-quantity">Số lượng: 2</div>
+                            </div>
+                            <div class="item-price">660.000 đ</div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div class="order-total">
+                            Tổng tiền: <span>1.194.000 đ</span>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-detail">Chi tiết</button>
+                            <button class="btn-reorder">Mua lại</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order 2 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-info">
+                        <div>Mã đơn: <span>#DH001233</span></div>
+                        <div>Ngày đặt: <span>08/11/2025</span></div>
+                    </div>
+                    <div class="order-status status-completed">Hoàn thành</div>
+                </div>
+                <div class="order-body">
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">
+                                <img src="https://via.placeholder.com/80x100/c8b4d4/ffffff?text=Áo" alt="Áo sơ mi">
+                            </div>
+                            <div class="item-details">
+                                <div>
+                                    <div class="item-name">Áo sơ mi - A26082002N</div>
+                                    <div class="item-specs">Màu: Tím | Size: M</div>
+                                </div>
+                                <div class="item-quantity">Số lượng: 1</div>
+                            </div>
+                            <div class="item-price">500.000 đ</div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div class="order-total">
+                            Tổng tiền: <span>500.000 đ</span>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-detail">Chi tiết</button>
+                            <button class="btn-reorder">Mua lại</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order 3 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div class="order-info">
+                        <div>Mã đơn: <span>#DH001232</span></div>
+                        <div>Ngày đặt: <span>05/11/2025</span></div>
+                    </div>
+                    <div class="order-status status-pending">Chờ xác nhận</div>
+                </div>
+                <div class="order-body">
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div class="item-image">
+                                <img src="https://via.placeholder.com/80x100/d4b5a0/ffffff?text=Áo" alt="Áo sơ mi">
+                            </div>
+                            <div class="item-details">
+                                <div>
+                                    <div class="item-name">Áo sơ mi - A26082001N</div>
+                                    <div class="item-specs">Màu: Be | Size: L</div>
+                                </div>
+                                <div class="item-quantity">Số lượng: 3</div>
+                            </div>
+                            <div class="item-price">1.080.000 đ</div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div class="order-total">
+                            Tổng tiền: <span>1.080.000 đ</span>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-detail">Chi tiết</button>
+                            <button class="btn-cancel">Hủy đơn</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button disabled>← Trước</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>Sau →</button>
+        </div>
+    </div>
+    <!-- footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Company Info -->
+        <div class="footer-company">
+            <div class="footer-logo">
+                
+                    <path d="M10 8 C10 6 12 5 14 6 L14 12 C14 14 16 15 18 14 L24 14 C26 14 27 16 26 18 L26 24 C27 26 25 28 23 27 L23 21 C23 19 21 18 19 19 L13 19 C11 19 10 17 11 15 L11 9" stroke="black" fill="none" stroke-width="2"/>
+                </svg>
+                <span>THE<br>OFICELOOK</span>
+            </div>
+            <h3>CÔNG TY CỔ PHẦN THỜI KOWLI VIỆT NAM</h3>
+            <p><strong>Hotline:</strong> 1900 1080</p>
+            <p>8:30 - 19:00 tất cả các ngày trong tuần</p>
+            <p><strong>VP Phía Bắc:</strong> Tầng 17 tòa nhà Viwaseen, 48 Phố Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội.</p>
+            <p><strong>VP Phía Nam:</strong> 186A Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP.HCM</p>
+        </div>
+
+        <!-- About Section -->
+        <div class="footer-column">
+            <h4>Giới Thiệu The Oficelook</h4>
+            <ul>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Hệ thống cửa hàng</a></li>
+                <li><a href="#">Liên hệ với THE OFICELOOK</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+            </ul>
+        </div>
+
+        <!-- Customer Support -->
+        <div class="footer-column">
+            <h4>Hỗ Trợ Khách Hàng</h4>
+            <ul>
+                <li><a href="#">Hỏi đáp</a></li>
+                <li><a href="#">Chính sách vận chuyển</a></li>
+                <li><a href="#">Hướng dẫn chọn kích cỡ</a></li>
+                <li><a href="#">Hướng dẫn thanh toán</a></li>
+                <li><a href="#">Quy định đổi hàng</a></li>
+                <li><a href="#">Hướng dẫn đổi hàng</a></li>
+            </ul>
+        </div>
+
+        <!-- Warranty Policy -->
+        <div class="footer-column">
+            <h4>Chính Sách Bảo Hành</h4>
+            <ul>
+                <li><a href="#">Chính sách bảo hành online</a></li>
+                <li><a href="#">Chính sách bảo hành tại shop</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Chính sách đổi trả</a></li>
+            </ul>
+        </div>
+
+        <!-- Connect & Payment -->
+        <div class="footer-column">
+            <h4>Kết Nối</h4>
+            <div class="social-icons">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">📷</a>
+                <a href="#" class="social-icon">▶</a>
+            </div>
+            
+            <div class="payment-methods">
+                <h5>Phương Thức Thanh Toán</h5>
+                <div class="payment-icons">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="payment-icon">
+                </div>
+            </div>
+
+            <div class="certification">
+                <!-- <img src="https://via.placeholder.com/120x50/0066CC/FFFFFF?text=BỘ+CÔNG+THƯƠNG" alt="Certification"> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        // Filter functionality
+        document.querySelector('.btn-search').addEventListener('click', function() {
+            alert('Tìm kiếm đơn hàng...');
+        });
+
+        document.querySelector('.btn-reset').addEventListener('click', function() {
+            document.querySelectorAll('.filter-group input, .filter-group select').forEach(el => {
+                el.value = '';
+            });
+        });
+
+        // Order actions
+        document.querySelectorAll('.btn-detail').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Xem chi tiết đơn hàng');
+            });
+        });
+
+        document.querySelectorAll('.btn-reorder').forEach(btn => {
+            btn.addEventListener('click', function() {
+                alert('Đặt lại đơn hàng');
+            });
+        });
+
+        document.querySelectorAll('.btn-cancel').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(confirm('Bạn có chắc muốn hủy đơn hàng này?')) {
+                    alert('Đã hủy đơn hàng');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

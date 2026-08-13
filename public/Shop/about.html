@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về chúng tôi</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: #333;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://via.placeholder.com/1200x400/333333/ffffff?text=Fashion+Store') center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 60px;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-content h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            max-width: 600px;
+        }
+
+        /* Story Section */
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 80px;
+            align-items: center;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 500px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-content h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .story-content h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #333;
+        }
+
+        .story-content p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Values Section */
+        .values-section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #333;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .value-card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 25px rgba(0,0,0,0.15);
+        }
+
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: #333;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+        }
+
+        .value-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #f9f9f9;
+            padding: 60px 20px;
+            margin-bottom: 80px;
+            border-radius: 8px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Team Section */
+        .team-section {
+            margin-bottom: 80px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .team-member {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-photo {
+            width: 100%;
+            height: 300px;
+            background: #f5f5f5;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-member h4 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: linear-gradient(135deg, #333 0%, #555 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .mission-section h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .mission-section p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            text-align: center;
+            padding: 60px 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .contact-cta h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contact-cta p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .btn-contact {
+            display: inline-block;
+            padding: 15px 40px;
+            background: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-contact:hover {
+            background: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .story-section {
+                grid-template-columns: 1fr;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-content h2 {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 300px;
+            }
+
+            .hero-content h2 {
+                font-size: 28px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+      <!-- Header -->
+      <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+               <img src="./img/Logo_Tách nền 1.png" alt="">
+                </svg>
+                
+            </a>
+            
+            <nav>
+                
+                <a href="index.html">TRANG CHỦ</a>
+                <a href="t-shisrt.html">ÁO</a>
+                <a href="trousers.html">QUẦN</a>
+                <a href="#">PHỤ KIỆN</a>
+                <a href="about.html">VỀ CHÚNG TÔI</a>
+                <a href="#">BÀI VIẾT </a>
+                <a href="#">LIÊN HỆ</a>
+            </nav>
+
+            <div class="header-right">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" placeholder="Bạn đang tìm gì ?">
+                </div>
+                
+                <div class="icon-buttons">
+                        <!-- <button aria-label="Yêu thích">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                            </svg>
+                        </button> -->
+                    <button aria-label="Tài khoản">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M6 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+                        </svg>
+                    </button>
+                    <button aria-label="Giỏ hàng">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="9" cy="21" r="1"/>
+                            <circle cx="20" cy="21" r="1"/>
+                            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <h1 class="page-title">VỀ CHÚNG TÔI</h1>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <h2>Thời Trang Nam Đẳng Cấp</h2>
+                <p>Nơi phong cách gặp gỡ chất lượng</p>
+            </div>
+        </div>
+
+        <!-- Story Section -->
+        <div class="story-section">
+            <div class="story-image">
+                <img src="https://via.placeholder.com/600x500/d4b5a0/ffffff?text=Our+Store" alt="Cửa hàng">
+            </div>
+            <div class="story-content">
+                <h2>Câu Chuyện Của Chúng Tôi</h2>
+                <p>
+                    Được thành lập vào năm 2010, chúng tôi bắt đầu với một ước mơ đơn giản: mang đến những sản phẩm thời trang nam chất lượng cao với giá cả hợp lý cho mọi người. Từ một cửa hàng nhỏ, chúng tôi đã không ngừng phát triển và mở rộng.
+                </p>
+                <p>
+                    Với hơn 15 năm kinh nghiệm trong ngành thời trang, chúng tôi tự hào là điểm đến tin cậy của hàng nghìn khách hàng trên khắp cả nước. Mỗi sản phẩm đều được chọn lọc kỹ càng, đảm bảo chất lượng vượt trội và phong cách đương đại.
+                </p>
+                <p>
+                    Sứ mệnh của chúng tôi không chỉ là bán quần áo, mà là giúp mỗi quý ông tự tin thể hiện phong cách riêng, tạo dấu ấn trong mọi hoàn cảnh - từ công sở đến dạo phố, từ các buổi gặp gỡ quan trọng đến những khoảnh khắc thường ngày.
+                </p>
+            </div>
+        </div>
+
+        <!-- Values Section -->
+        <div class="values-section">
+            <h2 class="section-title">GIÁ TRỊ CỐT LÕI</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">✓</div>
+                    <h3>Chất Lượng</h3>
+                    <p>Cam kết mang đến những sản phẩm chất lượng cao nhất, được kiểm định kỹ lưỡng từ chất liệu đến từng đường may.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">★</div>
+                    <h3>Phong Cách</h3>
+                    <p>Luôn cập nhật xu hướng mới nhất, kết hợp hài hòa giữa phong cách hiện đại và nét đẹp truyền thống.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">♥</div>
+                    <h3>Tận Tâm</h3>
+                    <p>Đặt sự hài lòng của khách hàng lên hàng đầu với dịch vụ chăm sóc chu đáo và chuyên nghiệp.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Năm Kinh Nghiệm</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Khách Hàng</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Sản Phẩm</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10</div>
+                    <div class="stat-label">Cửa Hàng</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Section -->
+        <div class="mission-section">
+            <h2>Sứ Mệnh Của Chúng Tôi</h2>
+            <p>
+                Chúng tôi tin rằng thời trang không chỉ là trang phục, mà là cách bạn thể hiện bản thân, 
+                là sự tự tin và đẳng cấp trong từng bước đi. Sứ mệnh của chúng tôi là đồng hành cùng 
+                quý ông Việt trong hành trình tìm kiếm phong cách riêng, mang đến những trải nghiệm 
+                mua sắm tuyệt vời và sản phẩm chất lượng nhất.
+            </p>
+        </div>
+
+        <!-- Team Section -->
+        <div class="team-section">
+            <h2 class="section-title">ĐỘI NGŨ CỦA CHÚNG TÔI</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/666666/ffffff?text=CEO" alt="CEO">
+                    </div>
+                    <h4>Nguyễn Văn A</h4>
+                    <p>Giám Đốc Điều Hành</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/666666/ffffff?text=Design" alt="Design Director">
+                    </div>
+                    <h4>Trần Thị B</h4>
+                    <p>Giám Đốc Thiết Kế</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/666666/ffffff?text=Marketing" alt="Marketing Manager">
+                    </div>
+                    <h4>Lê Văn C</h4>
+                    <p>Trưởng Phòng Marketing</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="https://via.placeholder.com/300x300/666666/ffffff?text=Sales" alt="Sales Manager">
+                    </div>
+                    <h4>Phạm Thị D</h4>
+                    <p>Trưởng Phòng Kinh Doanh</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="contact-cta">
+            <h2>Hãy Kết Nối Với Chúng Tôi</h2>
+            <p>Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn</p>
+            <a href="#" class="btn-contact">Liên Hệ Ngay</a>
+        </div>
+    </div>
+
+    <!-- footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <!-- Company Info -->
+        <div class="footer-company">
+            <div class="footer-logo">
+                
+                    <path d="M10 8 C10 6 12 5 14 6 L14 12 C14 14 16 15 18 14 L24 14 C26 14 27 16 26 18 L26 24 C27 26 25 28 23 27 L23 21 C23 19 21 18 19 19 L13 19 C11 19 10 17 11 15 L11 9" stroke="black" fill="none" stroke-width="2"/>
+                </svg>
+                <span>THE<br>OFICELOOK</span>
+            </div>
+            <h3>CÔNG TY CỔ PHẦN THỜI KOWLI VIỆT NAM</h3>
+            <p><strong>Hotline:</strong> 1900 1080</p>
+            <p>8:30 - 19:00 tất cả các ngày trong tuần</p>
+            <p><strong>VP Phía Bắc:</strong> Tầng 17 tòa nhà Viwaseen, 48 Phố Tố Hữu, Trung Văn, Nam Từ Liêm, Hà Nội.</p>
+            <p><strong>VP Phía Nam:</strong> 186A Nam Kỳ Khởi Nghĩa, Phường Võ Thị Sáu, Quận 3, TP.HCM</p>
+        </div>
+
+        <!-- About Section -->
+        <div class="footer-column">
+            <h4>Giới Thiệu The Oficelook</h4>
+            <ul>
+                <li><a href="#">Giới thiệu</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Hệ thống cửa hàng</a></li>
+                <li><a href="#">Liên hệ với THE OFICELOOK</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+            </ul>
+        </div>
+
+        <!-- Customer Support -->
+        <div class="footer-column">
+            <h4>Hỗ Trợ Khách Hàng</h4>
+            <ul>
+                <li><a href="#">Hỏi đáp</a></li>
+                <li><a href="#">Chính sách vận chuyển</a></li>
+                <li><a href="#">Hướng dẫn chọn kích cỡ</a></li>
+                <li><a href="#">Hướng dẫn thanh toán</a></li>
+                <li><a href="#">Quy định đổi hàng</a></li>
+                <li><a href="#">Hướng dẫn đổi hàng</a></li>
+            </ul>
+        </div>
+
+        <!-- Warranty Policy -->
+        <div class="footer-column">
+            <h4>Chính Sách Bảo Hành</h4>
+            <ul>
+                <li><a href="#">Chính sách bảo hành online</a></li>
+                <li><a href="#">Chính sách bảo hành tại shop</a></li>
+                <li><a href="#">Chính sách bảo mật</a></li>
+                <li><a href="#">Chính sách đổi trả</a></li>
+            </ul>
+        </div>
+
+        <!-- Connect & Payment -->
+        <div class="footer-column">
+            <h4>Kết Nối</h4>
+            <div class="social-icons">
+                <a href="#" class="social-icon">f</a>
+                <a href="#" class="social-icon">📷</a>
+                <a href="#" class="social-icon">▶</a>
+            </div>
+            
+            <div class="payment-methods">
+                <h5>Phương Thức Thanh Toán</h5>
+                <div class="payment-icons">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="payment-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" class="payment-icon">
+                </div>
+            </div>
+
+            <div class="certification">
+                <!-- <img src="https://via.placeholder.com/120x50/0066CC/FFFFFF?text=BỘ+CÔNG+THƯƠNG" alt="Certification"> -->
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
